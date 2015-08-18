@@ -67,3 +67,5 @@ c:\users\rura\documents\visual studio 2015\Projects\Fondef\Fondef\bin\Microsoft.
 c:\users\rura\documents\visual studio 2015\Projects\Fondef\Fondef\obj\Debug\Fondef.csprojResolveAssemblyReference.cache
 c:\users\rura\documents\visual studio 2015\Projects\Fondef\Fondef\obj\Debug\Fondef.dll
 c:\users\rura\documents\visual studio 2015\Projects\Fondef\Fondef\obj\Debug\Fondef.pdb
+c:\Users\Rura\documents\visual studio 2015\Projects\Fondef\Fondef\bin\Catfood.Shapefile.dll
+c:\Users\Rura\documents\visual studio 2015\Projects\Fondef\Fondef\bin\Catfood.Shapefile.xml

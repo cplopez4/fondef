@@ -1,0 +1,47 @@
+﻿@model Fondef.Models.Cuenca
+
+@{
+    ViewBag.Title = "Nueva Cuenca";
+}
+
+
+@section MyOtherJavascript {
+    <script type="text/javascript" src="https://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0&mkt=ES-es"></script>
+
+    <script type="text/javascript" src="~/Scripts/BingMapsShapes.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            GetMap();
+        });
+    </script>
+
+    <script src="~/Scripts/dropzone/dropzone.js"></script>
+    <link href="~/Scripts/dropzone/css/dropzone.css" rel="stylesheet" />
+}
+
+<div class="box-line title-margin">
+    <h2 class="title-heading">@ViewBag.Title</h2>
+</div>
+
+<div class="display-container-right">
+    <div class="row-fluid">
+        <div class="span3">
+            <div id="dropzone">
+                <form action="~/Cuenca/SaveUploadedFile" method="post" enctype="multipart/form-data" class="dropzone" id="dropzoneForm"></form>
+                <input type="button" class="input-block-level btn-proper btn btn-large" title="Mostrar Cuenca" value="Mostrar Polígono" onclick="return displayPolygon()" />
+            </div>
+            @using (Html.BeginForm("SaveShape", "Cuenca"))
+            {
+                <label>Nombre</label>
+                <input type="text" placeholder="Nombre de la cuenca" name="Name" class="input-block-level" required="">
+                <input type="hidden" id="Coordinates" name="Coordinates" value="#">
+                <input class="input-block-level btn-proper btn btn-large" id="submit" type="submit" value="Guardar" />
+            }
+        </div>
+        <!-- Debajo esta el div que contiene el mapa -->
+        <div class="span9">
+            <div id='map_shapes'></div>
+        </div>
+    </div>
+</div>

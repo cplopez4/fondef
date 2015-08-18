@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Fondef.Models.Cuenca>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Code)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Area)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Slope)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Coordinates)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LonCenter)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LatCenter)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Code)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Area)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Slope)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Coordinates)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LonCenter)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LatCenter)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>
