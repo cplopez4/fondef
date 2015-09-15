@@ -1,69 +1,71 @@
 ﻿@model IEnumerable<Fondef.Models.Cuenca>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Cuencas";
 }
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Code)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Area)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Slope)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Coordinates)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LonCenter)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LatCenter)
-        </th>
-        <th></th>
-    </tr>
+@section MyOtherJavascript {
+    <script type="text/javascript" src="https://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0&mkt=ES-es"></script>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Code)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Area)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Slope)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Coordinates)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LonCenter)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LatCenter)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
+    <script type="text/javascript" src="~/Scripts/BingMapsShapes.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            GetMap();
+        });
+    </script>
 }
 
-</table>
+<div class="box-line title-margin">
+    <h2 class="title-heading">@ViewBag.Title</h2>
+</div>
+@Html.ActionLink("Crear Nueva Cuenca", "Create")
+<div class="display-container-right">
+    <div class="row-fluid">
+        <div class="span5">
+            <table class="table table-striped">
+                <tr>
+                    <th>
+                        Nombre
+                    </th>
+                    <th>
+                        Área
+                    </th>
+                    <th>
+                        Código
+                    </th>
+                    <th></th>
+                    <th></th>
+                </tr>
+
+                @{
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Area)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Code)
+                            </td>
+                            <td>
+                                <a onclick="setPolypointsFromView(@item.Coordinates);" href="#">Ver</a> |
+                                @Html.ActionLink("Editar", "Edit", new { id = item.ID }) |
+                                @Html.ActionLink("Eliminar", "Delete", new { id = item.ID })
+                            </td>
+                        </tr>
+                    }
+                }
+
+            </table>
+        </div>
+        <!-- Debajo esta el div que contiene el mapa -->
+        <div class="span7">
+            <div id='map_shapes'></div>
+        </div>
+    </div>
+</div>

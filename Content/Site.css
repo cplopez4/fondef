@@ -3,10 +3,24 @@
     padding-bottom: 20px;
 }
 
+body.body-index {
+    padding: 0px;
+}
+
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+}
+
+.container.body-content.container-index {
+    padding-left: 0px;
+    padding-right: 0px;
+    margin: 0px !important;
+}
+
+.col-md-1.general_menu.inner.menu_index {
+    overflow: visible;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -24,8 +38,9 @@ textarea {
 }
 
 #map_shapes {
-    position: relative;
-    height: 578px;
+    position: fixed;
+    min-height: 100%;
+    min-width: 100%;
     overflow: hidden;
 }
 

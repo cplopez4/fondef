@@ -1,80 +1,155 @@
 ﻿@{
+    Layout =  "~/Views/Shared/_LayoutIndex.cshtml";
     ViewBag.Title = "Home Page";
 }
 
+<link href="~/Content/main.css" rel="stylesheet">
+<link href="~/Content/whhg.css" rel="stylesheet">
 <script type="text/javascript" src="https://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0&mkt=ES-es"></script>
-
-<script>
-    var map = null;
-    var polyPoints = new Array();   //Arreglo que guarda los puntos del poligono
-    var down = 0;
-    var X = 0, Y = 0;
-    var origin;
-    var options;
-    var shapeCoordinatesJSON = ""; //Variable global que almacena el JSON de las coordenadas
-
-    function GetMap() {
-        map = new Microsoft.Maps.Map(document.getElementById("map_shapes"), {
-            credentials: "ApOTYKFhJOwRBzZjezJNQfmXOYGZipN16UiNVMAqterclvoLldC89u7l9AsHrHOP"
-            //credentials: "Ar68-tKrKTTwzHDleJ9cdkPbn7VaTWWNQZXJmcwAjU_s33ARtdghuEnrvSh3QzFY"
-        });
-
-        map.setView({ center: new Microsoft.Maps.Location(-30, -70), zoom: 6 });
-
-        //Creamos un layer que solo guarde los poligonos
-        var polygonLayer = new Microsoft.Maps.EntityCollection();
-        map.entities.push(polygonLayer);
-
-        //Cursos en estilo de cruz
-        map.getRootElement().style.cursor = 'crosshair';
-
-        //Eliminamos el menú que aparece al apretar con el boton derecho
-        document.oncontextmenu = function (e) {
-            return false;
-        };
-
-        //Opciones del color del borde y el relleno del pólígono que se dibuja
-        options = { fillColor: new Microsoft.Maps.Color(140, 13, 76, 167), strokeColor: new Microsoft.Maps.Color(140, 2, 46, 108) };
-        //Eventos del mouse. Cada uno direcciona a un metodo que se ocupa de ese evento
-        //Microsoft.Maps.Events.addHandler(map, 'mouseup', MouseUpHandler);
-        //Microsoft.Maps.Events.addHandler(map, 'mousemove', MouseMoveHandler);
-        //Microsoft.Maps.Events.addHandler(map, 'mouseover', MouseOverHandler);
-        //Microsoft.Maps.Events.addHandler(map, 'rightclick', RightClickHandler);
-    }
-</script>
+<script type="text/javascript" src="~/Scripts/BingIndex.js"></script>
 
 <script type="text/javascript">
-        $(document).ready(function () {
+    $(document).ready(function () {
+            //initialize();
             GetMap();
+            var Shapes = @Html.Raw(Json.Encode(ViewData["Shapes"]));
+
+            $.each(Shapes, function(index, value){
+                setPolypointsFromView(JSON.parse(value.Coordinates));
+            });
+
+            createPins();
         });
 </script>
 
-<div id='map_shapes'></div>
-
-@*<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+<!--autorization modal-->
+<a href="#" class="btn btn-danger btn-sm btm-zindex none" id="Show_cont">Show content</a>
+<div class="modal fade" id="autorization">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Autorization</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email" />
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" />
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" />
+                            Check me out
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Sign in</button>
+                <button type="button" class="btn btn-primary btn-sm">Create account</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
 </div>
+<!-- /.modal -->
+<!--map-->
+<div id='map_shapes'></div>
+<!--/map-->
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>*@
+<!-- <script type="text/javascript" src="~/Scripts/map.js"></script> -->
+<script type="text/javascript" src="~/Scripts/pxgradient-1.0.2.jquery.js"></script>
+<!--Script for worked left smile categoryes menu-->
+<script type="text/javascript">
+        $(document).ready(function () {
+                        "use strict";
+            $(".inner ul li a").each(function (i) {
+                $(".inner ul li a:eq(" + i + ")").click(function () {
+                    var tab_id = i + 1;
+                    $(".inner ul li a").removeClass("active");
+                    $("#tabs .active").removeClass("active");
+                    $(this).addClass("active");
+                    $("#tabs div").stop(false, false).hide();
+                    $("#tab" + tab_id).stop(false, false).show();
+                    return false;
+                })
+            })
+        })
+</script>
+<script type="text/javascript">
+        $(document).ready(function () {
+                        "use strict";
+            $("#tabs_point li a").each(function (i) {
+                $("#tabs_point li a:eq(" + i + ")").click(function () {
+                    var tab_id = i + 1;
+                    $("#tabs_point li a").removeClass("active");
+                    $(".tabs_block_point .active").removeClass("active");
+                    $(this).addClass("active");
+                    $(".tabs_block_point div").stop(false, false).hide();
+                    $("#point_tab" + tab_id).stop(false, false).show();
+                    return false;
+                })
+            })
+        })
+</script>
+<!--/Script for worked left smile categoryes menu-->
+<!--Script for worked profile page-->
+<script type="text/javascript" src="~/Scripts/owl.carousel.js"></script>
+<script type="text/javascript">
+        $(document).ready(function () {
+                        "use strict";
+            $('#link_open').on('click', function () {
+                if ($('#link_open').hasClass("clooses")) {
+                    $("#open_span").removeClass("close_span").addClass("open_span");
+                    $("#profile").removeClass("profile_closed");
+                    $("#link_open").removeClass("clooses");
+                    $("#cont").addClass("none");
+                }
+                else {
+                    $("#open_span").addClass("close_span").removeClass("open_span");
+                    $("#profile").addClass("profile_closed");
+                    $("#link_open").addClass("clooses");
+                    $("#cont").removeClass("none");
+                }
+            })
+              $('#map_open').on('click', function () {
+                            "use strict";
+            $("#cont").addClass("none");
+            $("#Show_cont").removeClass("none");
+
+        })
+        $('#Show_cont').on('click', function () {
+                        "use strict";
+            $("#cont").removeClass("none");
+        })
+        });
+</script>
+<script type="text/javascript">
+        $(function () {
+                        "use strict";
+            $("#owl-demo, #myguest").owlCarousel({
+                items: 6,
+                itemsDesktop: [1000, 5],
+                itemsDesktopSmall: [900, 6],
+                itemsTablet: [600, 2],
+                itemsMobile: false
+            });
+
+        });
+</script>
+<!--/Script for worked profile page-->
+<!--Script for gradient icon in general menu-->
+<script type="text/javascript">
+        $(function () {
+                        "use strict";
+            $(".gradientmenu").pxgradient({
+                step: 10,
+                colors: ["#fdfeff", "#cfeefa"],
+                dir: "y"
+            });
+        });
+</script>

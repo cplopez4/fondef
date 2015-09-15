@@ -191,14 +191,42 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\active.png" />
+    <Content Include="Content\Images\arrow.png" />
+    <Content Include="Content\Images\ava1.png" />
+    <Content Include="Content\Images\clouds.jpg" />
+    <Content Include="Content\Images\demo01.png" />
+    <Content Include="Content\Images\demo7.png" />
+    <Content Include="Content\Images\headerbg.png" />
+    <Content Include="Content\Images\icon\01.png" />
+    <Content Include="Content\Images\icon\02.png" />
+    <Content Include="Content\Images\icon\03.png" />
+    <Content Include="Content\Images\icon\04.png" />
+    <Content Include="Content\Images\icon\05.png" />
+    <Content Include="Content\Images\icon\06.png" />
+    <Content Include="Content\Images\icon\07.png" />
+    <Content Include="Content\Images\icon\08.png" />
+    <Content Include="Content\Images\icon\09.png" />
+    <Content Include="Content\Images\logo.png" />
+    <Content Include="Content\Images\no_ava.png" />
+    <Content Include="Content\Images\open_profile_link.png" />
+    <Content Include="Content\Images\placeholder1.png" />
+    <Content Include="Content\Images\placeholder2.png" />
+    <Content Include="Content\Images\start.gif" />
+    <Content Include="Content\main.css" />
+    <Content Include="Content\whhg.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\BingIndex.js" />
     <Content Include="Scripts\BingMapsShapes.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\dropzone\css\stylus\basic.styl" />
     <Content Include="Scripts\dropzone\css\stylus\dropzone.styl" />
+    <Content Include="Content\Fonts\webhostinghub-glyphs.eot" />
+    <Content Include="Content\Fonts\webhostinghub-glyphs.svg" />
+    <Content Include="Content\Fonts\webhostinghub-glyphs.ttf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\dropzone\css\basic.css" />
     <Content Include="Scripts\dropzone\css\dropzone.css" />
@@ -215,7 +243,10 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\map.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\owl.carousel.js" />
+    <Content Include="Scripts\pxgradient-1.0.2.jquery.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
@@ -258,6 +289,8 @@
     <Content Include="Views\Cuenca\Details.cshtml" />
     <Content Include="Views\Cuenca\Edit.cshtml" />
     <Content Include="Views\Cuenca\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutIndex.cshtml" />
+    <Content Include="Views\Shared\_SidebarPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
